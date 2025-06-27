@@ -90,7 +90,7 @@ with upload_container:
         img_col, _ = st.columns([1, 2]) # Use one column for image, two for spacing
         with img_col:
             image = Image.open(uploaded_file)
-            st.image(image, caption='Uploaded Image.', use_column_width=True)
+            st.image(image, caption='Uploaded Image.', use_container_width=True) # Changed use_column_width to use_container_width
 
         # Add a button to trigger prediction below the image
         if st.button('Predict'):
@@ -108,7 +108,7 @@ with upload_container:
                         predicted_class_name = class_names[predicted_index]
                         st.write("Prediction:")
                         st.markdown(f"## **{predicted_class_name}**")
-                        st.balloons() # Add some fun
+                        # Removed st.balloons()
                     else:
                          if predicted_index is not None:
                              st.warning(f"Prediction index {predicted_index} is out of bounds for class names.")
