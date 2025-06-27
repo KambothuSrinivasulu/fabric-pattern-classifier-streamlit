@@ -5,7 +5,9 @@ This project is a web application that uses a deep learning model to classify di
 
 Live Demo
 You can access the live application here:
+
 https://fabric-pattern-classifier-app-9r3dneeynoc4shjbvqvszh.streamlit.app/.
+
 Access the Fabric Pattern Classifier App on Streamlit Cloud
 
 Features
