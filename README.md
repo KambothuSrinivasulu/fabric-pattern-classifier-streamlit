@@ -13,6 +13,7 @@ Upload fabric images in JPG, JPEG, or PNG format.
 Get instant predictions of the fabric pattern.
 Simple and intuitive user interface.
 Dataset
+
 The model was trained on a dataset containing images of various fabric patterns.
 
 
@@ -20,15 +21,21 @@ Number of Classes: 10
 Pattern Categories: [List your 10 specific class names here, e.g., "Checks", "Floral", "Stripes", etc.]
 
 Model
+
 Architecture: A Convolutional Neural Network (CNN) based on the ResNet architecture.
 Framework: Developed using TensorFlow and Keras.
+
 Training: The model was trained on the fabric pattern dataset to classify images into the 10 defined categories.
 Technical Details
+
 Libraries Used: Streamlit, TensorFlow, NumPy, Pillow, JSON.
+
 Deployment Platform: Deployed on Streamlit Cloud.
-How to Run Locally (Optional)
-If you want to run this application on your local machine:
+
+How to Run Locally:
+
 Clone this repository:
+
  cd fabric-pattern-classifier-streamlit
   
   pip install -r requirements.txt
