@@ -1,3 +1,4 @@
+
 import streamlit as st
 import tensorflow as tf
 import numpy as np
@@ -103,12 +104,12 @@ with upload_container:
 
                     if error:
                         st.error(f"Prediction error: {error}")
-                    elif predicted_index is not None and predicted_index < len(class_names):
+                    elif predicted_index is not None and predicted_index < len(class_names): # Corrected index check
                         # Get the predicted class name using the loaded class_names list
                         predicted_class_name = class_names[predicted_index]
                         st.write("Prediction:")
                         st.markdown(f"## **{predicted_class_name}**")
-                        # Removed st.balloons()
+                        st.balloons() # Add some fun
                     else:
                          if predicted_index is not None:
                              st.warning(f"Prediction index {predicted_index} is out of bounds for class names.")
