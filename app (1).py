@@ -63,43 +63,52 @@ def predict_image_class(uploaded_file, model, target_size=(224, 224)):
 
 # --- Streamlit UI Enhancements ---
 
-st.set_page_config(page_title="Fabric Pattern Classifier", layout="wide")
+st.set_page_config(page_title="Fabric Pattern Classifier", layout="centered") # Use 'centered' for a simpler look
 
-st.title("👕🧵 Fabric Pattern Classifier")
+# Use st.container for better grouping and styling
+header_container = st.container()
+upload_container = st.container()
+prediction_container = st.container()
 
-st.markdown(f"""
-    Welcome to the Fabric Pattern Classifier!
-    Upload an image of a fabric, and the model will predict its pattern.
-    Currently supports the following patterns: **{", ".join(class_names)}**.
-""")
+with header_container:
+    st.title("Fabric Pattern Classifier")
+    st.markdown("""
+        Upload an image of a fabric pattern below, and the model will predict its type.
+    """)
+    # Removed the list of class names from the main markdown for a cleaner look
 
-st.sidebar.header("About the App")
-st.sidebar.info("This application uses a pre-trained deep learning model to classify fabric patterns.")
-st.sidebar.info("Upload an image on the left to see the prediction!")
-
-col1, col2 = st.columns(2)
-
-with col1:
-    st.header("Upload Your Image")
+# Use columns within the upload container for layout
+with upload_container:
+    st.header("Upload Image")
+    # Add a file uploader widget
     uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
 
+    # Process the uploaded file
     if uploaded_file is not None:
         st.success("File uploaded successfully!")
-        image = Image.open(uploaded_file)
-        st.image(image, caption='Uploaded Image.', use_column_width=True)
+        # Display the uploaded image using a column for better control
+        img_col, _ = st.columns([1, 2]) # Use one column for image, two for spacing
+        with img_col:
+            image = Image.open(uploaded_file)
+            st.image(image, caption='Uploaded Image.', use_column_width=True)
 
+        # Add a button to trigger prediction below the image
         if st.button('Predict'):
-            with col2:
+            with prediction_container:
                 st.header("Prediction Result")
                 if deployed_model and class_names:
-                    predicted_index, error = predict_image_class(uploaded_file, deployed_model)
+                    # Display a spinner while predicting
+                    with st.spinner('Predicting...'):
+                        predicted_index, error = predict_image_class(uploaded_file, deployed_model)
 
                     if error:
                         st.error(f"Prediction error: {error}")
                     elif predicted_index is not None and predicted_index < len(class_names):
+                        # Get the predicted class name using the loaded class_names list
                         predicted_class_name = class_names[predicted_index]
-                        st.write(f"Predicted class: **{predicted_class_name}**")
-                        st.balloons()
+                        st.write("Prediction:")
+                        st.markdown(f"## **{predicted_class_name}**")
+                        st.balloons() # Add some fun
                     else:
                          if predicted_index is not None:
                              st.warning(f"Prediction index {predicted_index} is out of bounds for class names.")
@@ -108,8 +117,13 @@ with col1:
                 else:
                     st.error("Model or class names not loaded. Cannot make predictions.")
     else:
-        with col2:
-             st.info("Upload an image to see the prediction result here.")
+        with prediction_container:
+             st.info("Upload an image above to see the prediction result here.")
+
+# Optional: Add sidebar content (can be removed or modified)
+st.sidebar.header("About")
+st.sidebar.info("This is a simple web application for classifying fabric patterns using a trained deep learning model.")
+st.sidebar.info(f"Supported patterns: {', '.join(class_names)}") # Moved class names to sidebar
 
 
 st.markdown("---")
