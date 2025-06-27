@@ -15,9 +15,10 @@ Simple and intuitive user interface.
 Dataset
 The model was trained on a dataset containing images of various fabric patterns.
 
+
 Number of Classes: 10
 Pattern Categories: [List your 10 specific class names here, e.g., "Checks", "Floral", "Stripes", etc.]
-( add a note aboutOptional: You can data distribution if you wish, e.g., "Note: The dataset is primarily composed of images of female dress patterns, which may impact performance on other types of fabric.")
+
 Model
 Architecture: A Convolutional Neural Network (CNN) based on the ResNet architecture.
 Framework: Developed using TensorFlow and Keras.
@@ -27,8 +28,9 @@ Libraries Used: Streamlit, TensorFlow, NumPy, Pillow, JSON.
 Deployment Platform: Deployed on Streamlit Cloud.
 How to Run Locally (Optional)
 If you want to run this application on your local machine:
-
 Clone this repository:
  cd fabric-pattern-classifier-streamlit
+  
   pip install -r requirements.txt
+  
   streamlit run app.py
